@@ -1,25 +1,18 @@
 <template>
-  <div>
-    <h1>{{ title }}</h1>
-    <h1>{{ count }}</h1>
-    <button @click="count ++">추가</button>
-    <HomeComponent/>
-    <Status />
-  </div>
+  <v-app>
+    <v-content>
+      <User/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-  import HomeComponent from './Home'
-  import Status from "./Status";
+import User from "./components/User"
 
-  export default {
-    components: {
-      Status,
-      HomeComponent
-    },
-    data: () => ({
-      title: "Hello",
-      count: 1
-    }),
-  };
+export default {
+  name: "App",
+  components: {
+    User
+  }
+}
 </script>
