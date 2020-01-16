@@ -4,6 +4,11 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 
+import StatusComponent from './Status'
+
+// global component로 등록하기 위해
+Vue.component('AppStatus', StatusComponent)
+
 Vue.config.productionTip = false
 
 new Vue({
