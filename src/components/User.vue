@@ -14,7 +14,12 @@
         />
       </v-flex>
       <v-flex xs12 sm6>
-        <UserEdit/>
+        <UserEdit
+          :name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+        />
       </v-flex>
     </v-layout>
   </div>
