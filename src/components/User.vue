@@ -6,7 +6,12 @@
     <hr>
     <v-layout row wrap>
       <v-flex xs12 sm6>
-        <UserDetail :nameOfChild="name"/>
+        <UserDetail
+          :name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+        />
       </v-flex>
       <v-flex xs12 sm6>
         <UserEdit/>
@@ -26,6 +31,9 @@ export default {
   },
   data: () => ({
     name: "VueJS",
+    address: 'Seoul',
+    phone: '1234-5678',
+    hasDog: true
   }),
   methods: {
     changeName () {
