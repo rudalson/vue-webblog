@@ -21,6 +21,20 @@
             <v-list-item-title>About</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item link router :to="{
+          name: 'users',
+          params: {
+            id:4321,
+            name: 'tetris'
+          }
+        }" exact>
+          <v-list-item-action>
+            <v-icon>mdi-text</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Users</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
