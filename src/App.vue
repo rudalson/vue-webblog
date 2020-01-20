@@ -26,6 +26,10 @@
           params: {
             id:4321,
             name: 'tetris'
+          },
+          query: {
+            group: 'member',
+            category: 'trial'
           }
         }" exact>
           <v-list-item-action>
