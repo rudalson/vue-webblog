@@ -11,7 +11,13 @@ Vue.component('AppStatus', StatusComponent)
 
 Vue.config.productionTip = false
 
-export const eventBus = new Vue()
+export const eventBus = new Vue({
+  methods: {
+    userWasEdited(date) {
+      this.$emit('userWasEdited', date)
+    }
+  }
+})
 
 new Vue({
   router,
