@@ -42,7 +42,12 @@ export default {
     hasDog: true
   }),
   methods: {
-    parents () {
+    parents (user) {
+      // user = { name, address, phone, hasDog }
+      this.name = user.name
+      this.address = user.address
+      this.phone = user.phone
+      this.hasDog = user.hasDog
       console.log("부모가 받았어")
     }
   }

@@ -45,7 +45,7 @@
     methods: {
       changeUser() {
         console.log(this.user)
-        this.$emit('child')
+        this.$emit('child', this.user)
       }
     }
   }
