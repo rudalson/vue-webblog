@@ -2,14 +2,27 @@
   <div class="blue lighten-3 pa-3">
     <h1>User 컴포넌트</h1>
     <p>이름: {{ name }}</p>
+    <p>{{ getDateAndTime(createdAt) }}</p>
+    <p>{{helloToMixin}}</p>
     <v-btn @click="changeName()">이름 변경</v-btn>
     <hr>
     <v-layout row wrap>
       <v-flex xs12 sm6>
-        <UserDetail :nameOfChild="name"/>
+        <UserDetail
+          :name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+        />
       </v-flex>
       <v-flex xs12 sm6>
-        <UserEdit/>
+        <UserEdit
+          :name="name"
+          :address="address"
+          :phone="phone"
+          :hasDog="hasDog"
+          @child="parents"
+        />
       </v-flex>
     </v-layout>
   </div>
@@ -18,6 +31,7 @@
 <script>
 import UserDetail from "./UserDetail"
 import UserEdit from "./UserEdit"
+import { dateFormat } from "../mixins/dateFormat"
 
 export default {
   components: {
@@ -26,11 +40,29 @@ export default {
   },
   data: () => ({
     name: "VueJS",
+    address: 'Seoul',
+    phone: '1234-5678',
+    hasDog: true,
+    createdAt: null,
   }),
-  methods: {
-    changeName () {
-      this.name = "React"
+  computed: {
+    helloToMixin() {
+      return this.mixinData + ' 안녕하시오!'
     }
-  }
+  },
+  created() {
+    this.createdAt = new Date()
+  },
+  methods: {
+    parents (user) {
+      // user = { name, address, phone, hasDog }
+      this.name = user.name
+      this.address = user.address
+      this.phone = user.phone
+      this.hasDog = user.hasDog
+      console.log("부모가 받았어")
+    }
+  },
+  mixins: [dateFormat]
 }
 </script>
