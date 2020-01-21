@@ -19,6 +19,7 @@
           :address="address"
           :phone="phone"
           :hasDog="hasDog"
+          @child="parents"
         />
       </v-flex>
     </v-layout>
@@ -41,8 +42,8 @@ export default {
     hasDog: true
   }),
   methods: {
-    changeName () {
-      this.name = "React"
+    parents () {
+      console.log("부모가 받았어")
     }
   }
 }

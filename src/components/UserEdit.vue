@@ -44,9 +44,8 @@
     },
     methods: {
       changeUser() {
-        /* eslint-disable no-console */
         console.log(this.user)
-        /* eslint-enable no-console */
+        this.$emit('child')
       }
     }
   }
