@@ -39,6 +39,8 @@
 
 <script>
   import { eventBus } from "../main"
+  import { dateFormat } from "../mixins/dateFormat"
+
   export default {
     props: ['name', 'address', 'phone', 'hasDog'],
     data: () => ({
@@ -55,15 +57,7 @@
       })
     },
     methods: {
-      getDateAndTime(date) {
-        if (date !== null) {
-          let hour = date.getHours()
-          let minutes = date.getMinutes()
-          let fullDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-          return `${fullDate} ${hour}:${minutes}`
-        }
-        return null
-      }
-    }
+    },
+    mixins: [dateFormat]
   }
 </script>

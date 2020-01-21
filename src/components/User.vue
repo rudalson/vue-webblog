@@ -30,6 +30,7 @@
 <script>
 import UserDetail from "./UserDetail"
 import UserEdit from "./UserEdit"
+import { dateFormat } from "../mixins/dateFormat"
 
 export default {
   components: {
@@ -54,16 +55,8 @@ export default {
       this.phone = user.phone
       this.hasDog = user.hasDog
       console.log("부모가 받았어")
-    },
-    getDateAndTime(date) {
-      if (date !== null) {
-        let hour = date.getHours()
-        let minutes = date.getMinutes()
-        let fullDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-        return `${fullDate} ${hour}:${minutes}`
-      }
-      return null
     }
-  }
+  },
+  mixins: [dateFormat]
 }
 </script>
