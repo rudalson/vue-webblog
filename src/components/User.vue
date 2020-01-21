@@ -3,6 +3,7 @@
     <h1>User 컴포넌트</h1>
     <p>이름: {{ name }}</p>
     <p>{{ getDateAndTime(createdAt) }}</p>
+    <p>{{helloToMixin}}</p>
     <v-btn @click="changeName()">이름 변경</v-btn>
     <hr>
     <v-layout row wrap>
@@ -44,6 +45,11 @@ export default {
     hasDog: true,
     createdAt: null,
   }),
+  computed: {
+    helloToMixin() {
+      return this.mixinData + ' 안녕하시오!'
+    }
+  },
   created() {
     this.createdAt = new Date()
   },

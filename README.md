@@ -1,5 +1,7 @@
 # vue-webblog
 
+[Vue CLI 3 Tutorial](https://www.youtube.com/channel/UCZ6yPRDNz9bNWySjAv8kUng) 참조
+
 ## Project setup
 ```
 yarn install
