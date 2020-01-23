@@ -30,6 +30,10 @@ const routes = [
         component: () => import(/* webpackChunkName: "users-editl" */ '../views/UsersEdit'),
       }
     ]
+  },
+  {
+    path: '/redirect-me',
+    redirect: { name: 'users'}
   }
 ]
 
