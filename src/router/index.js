@@ -23,6 +23,11 @@ const routes = [
         path: ":id",
         name: "users-detail",
         component: () => import(/* webpackChunkName: "users-detail" */ '../views/UsersDetail'),
+      },
+      {
+        path: ":id/edit",
+        name: "users-edit",
+        component: () => import(/* webpackChunkName: "users-editl" */ '../views/UsersEdit'),
       }
     ]
   }
