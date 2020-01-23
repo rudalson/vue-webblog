@@ -17,10 +17,6 @@ const routes = [
   {
     path: '/users',
     name: 'users',
-    beforeEnter: (to, from, next) => {
-      console.log('to: ', to, 'from: ', from)
-      next()
-    },
     component: () => import(/* webpackChunkName: "users" */ '../views/Users'),
     children: [
       {

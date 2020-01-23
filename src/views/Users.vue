@@ -26,6 +26,20 @@
       return {
         userId: null
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      console.log("before Enter")
+      next()
+    },
+    beforeRouteLeave (to, from, next) {
+      console.log("before Leave")
+      next()
+    },
+    created() {
+      console.log("created")
+    },
+    destroyed() {
+      console.log("destroyed")
     }
   }
 </script>
