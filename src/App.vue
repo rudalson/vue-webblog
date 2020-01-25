@@ -50,7 +50,26 @@
 
             <v-spacer/>
             <v-toolbar-items>
-                <v-btn v-if="isLogin">웰컴</v-btn>
+                <v-menu offset-y v-if="isLogin">
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                                color="primary"
+                                dark
+                                v-on="on"
+                                icon
+                        >
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item router :to="{name: 'mypage'}">
+                            <v-list-item-title>마이페이지</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="$store.dispatch('logout')">
+                            <v-list-item-title>로그아웃</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
                 <v-btn v-else roouter :to="{name: 'login'}">Log In</v-btn>
             </v-toolbar-items>
         </v-app-bar>
