@@ -1,112 +1,109 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer
-            v-model="drawer"
-            app
-    >
-      <v-list dense>
-        <v-list-item link router :to="{name: 'home'}" exact>
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link router :to="{name: 'about'}" exact>
-          <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>About</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link router :to="{name: 'users'}">
-          <v-list-item-action>
-            <v-icon>mdi-account</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Users</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <v-app id="inspire">
+        <v-navigation-drawer
+                v-model="drawer"
+                app
+        >
+            <v-list dense>
+                <v-list-item link router :to="{name: 'home'}" exact>
+                    <v-list-item-action>
+                        <v-icon>mdi-home</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Home</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isLogin === false" router :to="{name: 'login'}" exact>
+                    <v-list-item-action>
+                        <v-icon>mdi-contact-mail</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>로그인</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-else router :to="{name: 'mypage'}" exact>
+                    <v-list-item-action>
+                        <v-icon>mdi-account</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>MyPage</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item link router :to="{name: 'users'}">
+                    <v-list-item-action>
+                        <v-icon>mdi-account</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Users</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
 
-    <v-app-bar
-            app
-            color="indigo"
-            dark
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
+        <v-app-bar
+                app
+                color="indigo"
+                dark
+        >
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
+            <v-toolbar-title>Application</v-toolbar-title>
 
-    <v-content>
-      <router-view />
-<!--      <v-container-->
-<!--              class="fill-height"-->
-<!--              fluid-->
-<!--      >-->
-<!--        <v-row-->
-<!--                align="center"-->
-<!--                justify="center"-->
-<!--        >-->
-<!--          <v-col class="text-center">-->
-<!--            <v-tooltip left>-->
-<!--              <template v-slot:activator="{ on }">-->
-<!--                <v-btn-->
-<!--                        :href="source"-->
-<!--                        icon-->
-<!--                        large-->
-<!--                        target="_blank"-->
-<!--                        v-on="on"-->
-<!--                >-->
-<!--                  <v-icon large>mdi-code-tags</v-icon>-->
-<!--                </v-btn>-->
-<!--              </template>-->
-<!--              <span>Source</span>-->
-<!--            </v-tooltip>-->
+            <v-spacer/>
+            <v-toolbar-items>
+                <v-menu offset-y v-if="isLogin">
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                                color="primary"
+                                dark
+                                v-on="on"
+                                icon
+                        >
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item router :to="{name: 'mypage'}">
+                            <v-list-item-title>마이페이지</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="$store.dispatch('logout')">
+                            <v-list-item-title>로그아웃</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+                <v-btn v-else roouter :to="{name: 'login'}">Log In</v-btn>
+            </v-toolbar-items>
+        </v-app-bar>
 
-<!--            <v-tooltip right>-->
-<!--              <template v-slot:activator="{ on }">-->
-<!--                <v-btn-->
-<!--                        icon-->
-<!--                        large-->
-<!--                        href="https://codepen.io/johnjleider/pen/zgxeLQ"-->
-<!--                        target="_blank"-->
-<!--                        v-on="on"-->
-<!--                >-->
-<!--                  <v-icon large>mdi-codepen</v-icon>-->
-<!--                </v-btn>-->
-<!--              </template>-->
-<!--              <span>Codepen</span>-->
-<!--            </v-tooltip>-->
-<!--          </v-col>-->
-<!--        </v-row>-->
-<!--      </v-container>-->
-    </v-content>
+        <v-content>
+            <router-view/>
+        </v-content>
 
-    <v-footer
-            color="indigo"
-            app
-    >
-      <span class="white--text">&copy; 2019</span>
-    </v-footer>
-  </v-app>
+        <v-footer
+                color="indigo"
+                app
+        >
+            <span class="white--text">&copy; 2019</span>
+        </v-footer>
+    </v-app>
 </template>
 
 <script>
-  export default {
-    props: {
-      source: String,
-    },
-    data: () => ({
-      drawer: null,
-    }),
-    methods: {
-      test() {
-        alert("clicked")
-      }
+    import {mapState} from 'vuex'
+
+    export default {
+        props: {
+            source: String,
+        },
+        data: () => ({
+            drawer: null,
+        }),
+        computed: {
+            ...mapState(["isLogin"])
+        },
+        methods: {
+            test() {
+                alert("clicked")
+            }
+        }
     }
-  }
 </script>
