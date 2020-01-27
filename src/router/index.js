@@ -70,7 +70,7 @@ const routes = [
     },
     {
         path: '/*',
-        redirect: {name: 'home'}
+        component: () => import('../views/e404'),
     }
 ]
 
