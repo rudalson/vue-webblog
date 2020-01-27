@@ -28,6 +28,7 @@
                         })">로그인
                         </v-btn>
                         <v-btn @click="test">테스트</v-btn>
+                        <v-btn @click="testPost">테스트 포스트</v-btn>
                     </div>
                 </v-card>
             </v-flex>
@@ -65,6 +66,18 @@
                     })
                     .then(() => {
                         // always executed
+                    });
+            },
+            testPost() {
+                axios.post('https://reqres.in/api/register', {
+                    "email": "eve.holt@reqres.in",
+                    "password": "pistol"
+                })
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
                     });
             }
         }
