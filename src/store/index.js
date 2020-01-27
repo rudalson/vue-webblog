@@ -33,39 +33,45 @@ export default new Vuex.Store({
     },
     actions: {
         // 로그인 시도
-        login({commit}, loginObj) {
+        login({dispatch}, loginObj) {
             axios.post('https://reqres.in/api/login', loginObj)
                 .then(res => {
                     // 성공시 토큰을 받음(user_id 값도 받아 올것임)
                     // 토큰을 헤더에 포함시켜서 유저 정보를 요청
-                    let config = {
-                        headers: {
-                            "access-token": res.data.token
-                        }
-                    }
-                    axios
-                        .get('https://reqres.in/api/users/2', config)
-                        .then(response => {
-                            let userInfo = {
-                                id: response.data.data.id,
-                                first_name: response.data.data.first_name,
-                                last_name: response.data.data.last_name,
-                                avatar: response.data.data.avatar
-                            }
-                            commit('loginSuccess', userInfo);
-                            router.push({name: "mypage"});
-                        })
-                        .catch(() => {
-                            alert('이메일과 비밀번호를 확인하세요.')
-                        })
+                    let token = res.data.token;
+                    localStorage.setItem("access_token", token);
+                    dispatch("getMemberInfo")
                 })
                 .catch(() => {
-                    commit('loginError')
+                    alert('이메일과 비밀번호를 확인하세요')
                 });
         },
         logout({commit}) {
             commit("logout");
             router.push({name: 'home'});
+        },
+        getMemberInfo({commit}) {
+            let token = localStorage.getItem("access_token");
+            let config = {
+                headers: {
+                    "access-token": token
+                }
+            }
+            axios
+                .get('https://reqres.in/api/users/2', config)
+                .then(response => {
+                    let userInfo = {
+                        id: response.data.data.id,
+                        first_name: response.data.data.first_name,
+                        last_name: response.data.data.last_name,
+                        avatar: response.data.data.avatar
+                    }
+                    commit('loginSuccess', userInfo);
+                })
+                .catch(() => {
+                    commit("loginError");
+                    alert('이메일과 비밀번호를 확인하세요.')
+                })
         }
     },
     modules: {}
