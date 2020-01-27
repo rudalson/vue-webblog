@@ -27,6 +27,7 @@
                          password: password
                         })">로그인
                         </v-btn>
+                        <v-btn @click="test">테스트</v-btn>
                     </div>
                 </v-card>
             </v-flex>
@@ -36,6 +37,7 @@
 
 <script>
     import {mapState, mapActions} from "vuex"
+    import axios from "axios"
 
     export default {
         data() {
@@ -49,6 +51,22 @@
         },
         methods: {
             ...mapActions(["login"]),
+            test() {
+                // Make a request for a user with a given ID
+                axios
+                    .get('https://reqres.in/api/users?page/2')
+                    .then(res => {
+                        // handle success
+                        console.log(res);
+                    })
+                    .catch(error => {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(() => {
+                        // always executed
+                    });
+            }
         }
     }
 </script>
